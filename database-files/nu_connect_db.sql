@@ -172,7 +172,9 @@ DROP TABLE IF EXISTS job_posting;
 CREATE TABLE IF NOT EXISTS job_posting (
    posting_id INT PRIMARY KEY AUTO_INCREMENT,
    alumni_id INT NOT NULL,
-   title VARCHAR(200) NOT NULL,
+   title VA
+   
+   RCHAR(200) NOT NULL,
    description TEXT,
    preferred_major VARCHAR(100),
    preferred_year INT,
@@ -190,3 +192,68 @@ CREATE INDEX idx_session_date ON session(session_date);
 CREATE INDEX idx_session_status ON session(status);
 CREATE INDEX idx_application_status ON application(status);
 CREATE INDEX idx_report_status ON report(status);
+
+-- Sample data for location
+insert into location (city, state, country) values ('Irvine', 'California', 'United States');
+insert into location (city, state, country) values ('Seattle', 'Washington', 'United States');
+insert into location (city, state, country) values ('Washington', 'District of Columbia', 'United States');
+insert into location (city, state, country) values ('Pensacola', 'Florida', 'United States');
+insert into location (city, state, country) values ('Homestead', 'Florida', 'United States');
+insert into location (city, state, country) values ('Houston', 'Texas', 'United States');
+insert into location (city, state, country) values ('Washington', 'District of Columbia', 'United States');
+insert into location (city, state, country) values ('Oakland', 'California', 'United States');
+insert into location (city, state, country) values ('Las Cruces', 'New Mexico', 'United States');
+insert into location (city, state, country) values ('San Francisco', 'California', 'United States');
+insert into location (city, state, country) values ('Frederick', 'Maryland', 'United States');
+insert into location (city, state, country) values ('Racine', 'Wisconsin', 'United States');
+insert into location (city, state, country) values ('New Orleans', 'Louisiana', 'United States');
+insert into location (city, state, country) values ('Asheville', 'North Carolina', 'United States');
+insert into location (city, state, country) values ('Baltimore', 'Maryland', 'United States');
+insert into location (city, state, country) values ('Vancouver', 'Washington', 'United States');
+insert into location (city, state, country) values ('Berkeley', 'California', 'United States');
+insert into location (city, state, country) values ('Lancaster', 'California', 'United States');
+insert into location (city, state, country) values ('Colorado Springs', 'Colorado', 'United States');
+insert into location (city, state, country) values ('Tucson', 'Arizona', 'United States');
+insert into location (city, state, country) values ('Norman', 'Oklahoma', 'United States');
+insert into location (city, state, country) values ('Tulsa', 'Oklahoma', 'United States');
+insert into location (city, state, country) values ('Huntington', 'West Virginia', 'United States');
+insert into location (city, state, country) values ('Evansville', 'Indiana', 'United States');
+insert into location (city, state, country) values ('Laredo', 'Texas', 'United States');
+insert into location (city, state, country) values ('Buffalo', 'New York', 'United States');
+insert into location (city, state, country) values ('Des Moines', 'Iowa', 'United States');
+insert into location (city, state, country) values ('Norfolk', 'Virginia', 'United States');
+insert into location (city, state, country) values ('Lansing', 'Michigan', 'United States');
+insert into location (city, state, country) values ('Falls Church', 'Virginia', 'United States');
+
+-- Sample data for major
+insert into major (major_name, department) values ('Computer Science', 'School of Engineering');
+insert into major (major_name, department) values ('Data Science', 'School of Engineering');
+insert into major (major_name, department) values ('Software Engineering', 'School of Engineering');
+insert into major (major_name, department) values ('Information Systems', 'School of Information');
+insert into major (major_name, department) values ('Business Administration', 'School of Business');
+insert into major (major_name, department) values ('Accounting', 'School of Business');
+insert into major (major_name, department) values ('Finance', 'School of Business');
+insert into major (major_name, department) values ('Marketing', 'School of Business');
+insert into major (major_name, department) values ('Economics', 'School of Social Science');
+insert into major (major_name, department) values ('Management', 'School of Social Science');
+insert into major (major_name, department) values ('Psychology', 'School of Social Science');
+insert into major (major_name, department) values ('Sociology', 'School of Humanities');
+insert into major (major_name, department) values ('Political Science', 'School of Physical Science');
+insert into major (major_name, department) values ('History', 'School of Biological Science');
+insert into major (major_name, department) values ('Mathematics', 'School of Physical Science');
+insert into major (major_name, department) values ('Statistics', 'School of Social Science');
+insert into major (major_name, department) values ('Biology', 'School of Humanities');
+insert into major (major_name, department) values ('Chemistry', 'School of Physical Sciences');
+insert into major (major_name, department) values ('Physics', 'School of Biological Sciences');
+insert into major (major_name, department) values ('Mechanical Engineering', 'School of Engineering');
+insert into major (major_name, department) values ('Electrical Engineering', 'School of Engineering');
+insert into major (major_name, department) values ('Civil Engineering', 'School of Engineering');
+insert into major (major_name, department) values ('Industrial Engineering', 'School of Engineering');
+insert into major (major_name, department) values ('Biomedical Engineering', 'School of Engineering');
+insert into major (major_name, department) values ('Communication Studies', 'School of Communication');
+insert into major (major_name, department) values ('Journalism', 'School of Communication');
+insert into major (major_name, department) values ('Public Health', 'School of Public Health');
+insert into major (major_name, department) values ('Education', 'School of Education');
+insert into major (major_name, department) values ('Environmental Science', 'School of Social Studies');
+insert into major (major_name, department) values ('Design & Media Arts', 'School of Arts');
+
