@@ -26,7 +26,7 @@ def api_get(path, params=None, default=None):
     return default
 
 first_name = st.session_state.get('first_name', 'Data Analyst')
-st.title(f"Match & Engagement Analytics – {first_name}")
+st.title(f"Match & Engagement Analytics")
 st.write('')
 st.write('### Overall Connections & Session Activity')
 

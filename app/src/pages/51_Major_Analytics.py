@@ -27,7 +27,7 @@ def api_get(path, params=None, default=None):
 
 # Personalize page with the user's name from session state
 first_name = st.session_state.get('first_name', 'Data Analyst')
-st.title(f"Majors & Location Analytics – {first_name}")
+st.title(f"Majors & Location Analytics")
 st.write('')
 st.write('### Major Participation across Students & Alumni')
 
