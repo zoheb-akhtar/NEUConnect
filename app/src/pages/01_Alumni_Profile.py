@@ -33,29 +33,36 @@ else:
     API_URL = f"http://web-api:4000/alumni/{alumni_id}"
 
     try:
-        # Fetch NGO details
+        # Fetch alumni details
         response = requests.get(API_URL)
 
         if response.status_code == 200:
             alumni = response.json()
 
             # Display basic information
-            st.header(alumni["Name"])
+            st.header(alumni.get("name", "Alumni Profile"))
 
             col1 = st.columns(1)
 
             with col1:
                 st.subheader("About You")
-                st.write(f"**Email:** {alumni['email']}")
-                st.write(f"**Graduation Year:** {alumni['graduation_year']}")
-                st.write(f"**Current Role:** {alumni['current_role']}")
-                st.write(f"**Company Name:** {alumni['company_name']}")
-                st.write(f"**Industry:** {alumni['industry']}")
-                st.write(f"**Graduation Year:** {alumni['graduation_year']}")
-                st.write(f"**Field:** {alumni['field']}")
-                st.write(f"**Bio:** {alumni['bio']}")
-                st.write(f"**Location:** {alumni['city']}, {alumni['state']}, {alumni['country']}")
-                st.write(f"**Availability Status:** {alumni['availability_status']}")
+                st.write(f"**Email:** {alumni.get('email', 'N/A')}")
+                st.write(f"**Graduation Year:** {alumni.get('graduation_year', 'N/A')}")
+                st.write(f"**Current Role:** {alumni.get('current_role', 'N/A')}")
+                st.write(f"**Company Name:** {alumni.get('company_name', 'N/A')}")
+                st.write(f"**Industry:** {alumni.get('industry', 'N/A')}")
+                st.write(f"**Field:** {alumni.get('field', 'N/A')}")
+                st.write(f"**Bio:** {alumni.get('bio', 'No bio available')}")
+                
+                # Location with proper handling
+                city = alumni.get('city', '')
+                state = alumni.get('state', '')
+                country = alumni.get('country', '')
+                location_parts = [part for part in [city, state, country] if part]
+                location_str = ', '.join(location_parts) if location_parts else 'N/A'
+                st.write(f"**Location:** {location_str}")
+                
+                st.write(f"**Availability Status:** {alumni.get('availability_status', 'N/A')}")
 
 
 
