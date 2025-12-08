@@ -65,7 +65,9 @@ def ClassificationNav():
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
     st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
+        st.page_link("pages/21_Admin_Approve_Users.py", label="Approve Users", icon="✅")
+        st.page_link("pages/22_Admin_Reports.py", label="Reports", icon="🚩")
+        st.page_link("pages/23_Admin_System_Stats.py", label="System Stats", icon="📊")
     )
 
 
