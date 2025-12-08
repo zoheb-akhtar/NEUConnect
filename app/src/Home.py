@@ -85,7 +85,10 @@ personas = {
 }
 
 # base url for flask API
-API_BASE = st.secrets.get("API_BASE", "http://backend:8000")
+try:
+        API_BASE = st.secrets["API_BASE"]
+except Exception:
+        API_BASE = "http://backend:8000"
 
 def get_users(persona_cfg):
         '''
