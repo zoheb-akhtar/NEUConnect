@@ -28,7 +28,7 @@ def api_get(path, params=None, default=None):
 first_name = st.session_state.get('first_name', 'Data Analyst')
 st.title(f"Mentors & Companies Analytics – {first_name}")
 st.write('')
-st.write('### Alumni mentors supporting the most students')
+st.write('### Alumni Mentors Supporting the Most Students')
 
 # Pull data for alumni, connections, and sessions
 alumni = api_get("/alumni", default=[])
@@ -80,7 +80,7 @@ if not alum_df.empty and (not conn_df.empty or not sess_df.empty):
 
     if "name" in top_mentors.columns:
         st.write('')
-        st.write("#### Top mentors by unique students mentored")
+        st.write("#### Top Mentors by Unique Students Mentored")
         chart_df = top_mentors.set_index("name")[["unique_students", "session_count"]]
         st.bar_chart(chart_df)
 else:
@@ -88,7 +88,7 @@ else:
 
 st.write('')
 st.write('---')
-st.write('### Companies and where alumni work')
+st.write('### Companies & Where Alumni Work')
 
 companies = api_get("/companies", default=[])
 if companies and not alum_df.empty:
@@ -108,7 +108,7 @@ if companies and not alum_df.empty:
 
         if "company_name" in merged_comp.columns:
             st.write('')
-            st.write("#### Alumni count by company")
+            st.write("#### Alumni Count by Company")
             chart_df = merged_comp.set_index("company_name")["alumni_count"]
             st.bar_chart(chart_df)
     else:

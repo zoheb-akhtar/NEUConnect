@@ -28,7 +28,7 @@ def api_get(path, params=None, default=None):
 first_name = st.session_state.get('first_name', 'Data Analyst')
 st.title(f"Match & Engagement Analytics – {first_name}")
 st.write('')
-st.write('### Overall connections and session activity')
+st.write('### Overall Connections & Session Activity')
 
 # Pull data for students, connections, and sessions
 students = api_get("/students", default=[])
@@ -62,7 +62,7 @@ c2.metric("Total Sessions", total_sessions)
 
 st.write('')
 st.write('---')
-st.write('### Session trends')
+st.write('### Session Trends')
 
 if sessions:
     sess_df = pd.DataFrame(sessions)  

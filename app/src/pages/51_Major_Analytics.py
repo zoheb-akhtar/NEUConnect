@@ -29,7 +29,7 @@ def api_get(path, params=None, default=None):
 first_name = st.session_state.get('first_name', 'Data Analyst')
 st.title(f"Majors & Location Analytics – {first_name}")
 st.write('')
-st.write('### Major participation across students and alumni')
+st.write('### Major Participation across Students & Alumni')
 
 # Pull data for majors, students, and alumni from the API
 majors = api_get("/majors", default=[])
@@ -73,7 +73,7 @@ if majors and (students or alumni):
 
     if "major_name" in merged.columns:
         st.write('')
-        st.write("#### Students & alumni per major")
+        st.write("#### Students & Alumni per Major")
         chart_df = merged.set_index("major_name")[["student_count", "alumni_count"]]
         st.bar_chart(chart_df)
 else:
@@ -81,7 +81,7 @@ else:
 
 st.write('')
 st.write('---')
-st.write('### Locations of users')
+st.write('### Locations of Users')
 
 locations = api_get("/locations", default=[])
 
