@@ -4,6 +4,9 @@
 
 import streamlit as st
 
+st.sidebar.caption(f"NAV LOADED FROM: {__file__}")
+st.sidebar.caption("NAV VERSION: ADMIN-FIX-1")
+
 
 #### ------------------------ General ------------------------
 def HomeNav():
@@ -62,7 +65,6 @@ def ClassificationNav():
 
 
 #### ------------------------ System Admin Role ------------------------
-# -------------------- System Admin Role --------------------
 def AdminPageNav():
     st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
     st.sidebar.page_link("pages/21_Admin_Applications.py", label="Applications", icon="✅")
