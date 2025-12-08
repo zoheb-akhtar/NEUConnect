@@ -6,14 +6,14 @@ from logging.handlers import RotatingFileHandler
 
 from backend.db_connection import db
 # Import all your NU Connect blueprints
-from backend.students.student_routes import students
+from backend.students.students_routes import students
 from backend.alumni.alumni_routes import alumni
-from backend.connections.connection_routes import connections
-from backend.sessions.session_routes import sessions
-from backend.applications.application_routes import applications
+from backend.connections.connections_routes import connections
+from backend.sessions.sessions_routes import sessions
+from backend.applications.applications_routes import applications
 from backend.admin.admin_routes import admin
 from backend.analytics.analytics_routes import analytics
-from backend.job_postings.job_posting_routes import job_postings
+from backend.job_postings.job_postings_routes import job_postings
 
 def create_app():
     app = Flask(__name__)
