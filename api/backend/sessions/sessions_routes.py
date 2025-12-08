@@ -45,6 +45,11 @@ def get_all_sessions():
         sessions = cursor.fetchall()
         cursor.close()
         
+        # Convert timedelta objects to strings for JSON serialization
+        for session in sessions:
+            if 'session_time' in session and session['session_time'] is not None:
+                session['session_time'] = str(session['session_time'])
+        
         current_app.logger.info(f'Successfully retrieved {len(sessions)} sessions')
         return jsonify(sessions), 200
     except Error as e:
@@ -76,6 +81,10 @@ def get_session(session_id):
             return jsonify({"error": "Session not found"}), 404
         
         cursor.close()
+
+        # Convert timedelta to string
+        if 'session_time' in session and session['session_time'] is not None:
+            session['session_time'] = str(session['session_time'])
 
         current_app.logger.info("Successfully retrieved session")
         return jsonify(session), 200

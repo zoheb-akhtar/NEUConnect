@@ -24,8 +24,27 @@ try:
         
         # Separate sessions by time
         today = datetime.now().date()
-        upcoming = [s for s in sessions if datetime.strptime(s['session_date'], '%Y-%m-%d').date() >= today]
-        past = [s for s in sessions if datetime.strptime(s['session_date'], '%Y-%m-%d').date() < today]
+        upcoming = []
+        past = []
+        
+        for s in sessions:
+            # Parse session date - handle different formats
+            session_date_str = s.get('session_date', '')
+            try:
+                # Try parsing as GMT format first
+                if 'GMT' in session_date_str:
+                    session_date = datetime.strptime(session_date_str, '%a, %d %b %Y %H:%M:%S GMT').date()
+                else:
+                    # Try standard format
+                    session_date = datetime.strptime(session_date_str, '%Y-%m-%d').date()
+                
+                if session_date >= today:
+                    upcoming.append(s)
+                else:
+                    past.append(s)
+            except:
+                # If parsing fails, treat as upcoming
+                upcoming.append(s)
         
         # Sort upcoming by date
         upcoming.sort(key=lambda x: x['session_date'])

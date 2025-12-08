@@ -189,7 +189,6 @@ def delete_alumni(alumni_id):
     except Error as e:
         return jsonify({"error": str(e)}), 500
 
-
 # Get alumni availability schedule
 # Streamlit: Use requests.get(f'http://web-api:4000/alumni/{alumni_id}/availability')
 #            Display schedule in a calendar or table format
@@ -203,16 +202,22 @@ def get_alumni_availability(alumni_id):
         if not cursor.fetchone():
             return jsonify({"error": "Alumni not found"}), 404
 
-        # Get availability schedule
         cursor.execute("SELECT * FROM availability_schedule WHERE alumni_id = %s", (alumni_id,))
-        schedule = cursor.fetchall()
-        cursor.close()
+        schedule = cursor.fetchall()  # ← INDENT THIS
+        cursor.close()  # ← INDENT THIS
 
-        return jsonify(schedule), 200
+        # Convert timedelta objects to strings for JSON serialization
+        for slot in schedule:  # ← INDENT THIS
+            if 'start_time' in slot and slot['start_time'] is not None:  # ← INDENT THIS
+                slot['start_time'] = str(slot['start_time'])  # ← INDENT THIS
+            if 'end_time' in slot and slot['end_time'] is not None:  # ← INDENT THIS
+                slot['end_time'] = str(slot['end_time'])  # ← INDENT THIS
+
+        return jsonify(schedule), 200  # ← INDENT THIS
     except Error as e:
         return jsonify({"error": str(e)}), 500
 
-
+        
 # Create new availability slots for alumni
 # Streamlit: Use st.form() with day/time selectors, then:
 #            requests.post(f'http://web-api:4000/alumni/{alumni_id}/availability', json={

@@ -58,7 +58,7 @@ personas = {
         },
         "Alumni": {
                 "role": "alumni",
-                "home_page": "pages/40_Alumni_Home.py",
+                "home_page": "pages/00_Alumni_Home.py",
                 "user_endpoint": "/alumni",
                 "fallback_users": [
                         {"id": "10", "first_name": "Johnny", "last_name": "Cage"},

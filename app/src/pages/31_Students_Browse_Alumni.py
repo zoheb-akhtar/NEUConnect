@@ -12,26 +12,21 @@ SideBarLinks()
 st.title('🔍 Alumni Discovery')
 st.write('Browse and connect with alumni mentors')
 
-# Get current student ID from session state
 current_student_id = int(st.session_state.get('user_id', 1))
 
-# Search and filter section
 col1, col2 = st.columns([3, 1])
 
 with col1:
     search_query = st.text_input('🔍 Search by name, field, or role', placeholder='e.g., Software Engineer, Data Science')
 
 with col2:
-    # Field filter
     fields = ['All Fields', 'Software Engineering', 'Data Science', 'Product Management', 
               'Consulting', 'Finance', 'Marketing', 'Technology', 'Healthcare']
     field_filter = st.selectbox('Field Filter', fields)
 
 st.write('')
 
-# Fetch alumni data from API
 try:
-    # Use query parameters for filtering at API level
     params = {}
     if field_filter != 'All Fields':
         params['field'] = field_filter
@@ -41,7 +36,6 @@ try:
     if response.status_code == 200:
         alumni_list = response.json()
         
-        # Client-side search filter
         filtered_alumni = alumni_list
         
         if search_query:
@@ -53,7 +47,6 @@ try:
         st.write(f'**{len(filtered_alumni)} results**')
         st.write('')
         
-        # Display alumni cards
         for alumni in filtered_alumni:
             with st.container():
                 col_left, col_right = st.columns([4, 1])
@@ -64,7 +57,6 @@ try:
                     st.write(f"🎓 Class of {alumni.get('graduation_year', 'N/A')}")
                     st.write(f"📍 Field: {alumni.get('field', 'N/A')}")
                     
-                    # Show availability
                     availability = alumni.get('availability_status', 'unavailable')
                     if availability == 'available':
                         st.success('✅ Available for mentorship')
@@ -72,7 +64,6 @@ try:
                         st.warning('⏸️ Currently unavailable')
                 
                 with col_right:
-                    # Schedule meeting button for available alumni
                     availability = alumni.get('availability_status', 'unavailable')
                     if availability == 'available':
                         if st.button('📅 Schedule Meeting', key=f"schedule_{alumni['alumni_id']}", 
@@ -81,19 +72,21 @@ try:
                             st.session_state['alumni_name'] = alumni.get('name', 'N/A')
                             st.rerun()
                     
-                    # Check if already connected
                     try:
                         conn_response = requests.get(f"http://web-api:4000/connections?student_id={current_student_id}&alumni_id={alumni['alumni_id']}")
                         if conn_response.status_code == 200:
                             connections = conn_response.json()
-                            is_connected = len(connections) > 0
                             
-                            if is_connected:
+                            accepted_conn = [c for c in connections if c.get('status') == 'accepted']
+                            pending_conn = [c for c in connections if c.get('status') == 'pending']
+                            
+                            if accepted_conn:
                                 st.success('Connected ✓')
+                            elif pending_conn:
+                                st.warning('Request Pending ⏳')
                             else:
                                 if st.button('Connect', key=f"connect_{alumni['alumni_id']}", 
                                            use_container_width=True):
-                                    # Create connection request
                                     connection_data = {
                                         'student_id': current_student_id,
                                         'alumni_id': alumni['alumni_id'],
@@ -109,7 +102,6 @@ try:
                     except:
                         pass
                 
-                # Show scheduling form if this alumni is selected
                 if st.session_state.get('schedule_with_alumni') == alumni['alumni_id']:
                     st.write('---')
                     st.write(f"### 📅 Schedule Meeting with {st.session_state.get('alumni_name')}")
@@ -161,7 +153,6 @@ except Exception as e:
     st.error(f'Error connecting to server: {str(e)}')
     logger.error(f'Error in Browse_Alumni: {str(e)}')
 
-# Quick actions at bottom
 st.write('')
 st.write('---')
 st.write('### Quick Actions')

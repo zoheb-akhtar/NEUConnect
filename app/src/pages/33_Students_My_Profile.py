@@ -8,29 +8,25 @@ import requests
 st.set_page_config(layout='wide')
 SideBarLinks()
 
-st.title('👤 My Profile')
+st.title(' My Profile')
 
-# Get current student ID from session state
 current_student_id = int(st.session_state.get('user_id', 1))
 
 try:
-    # Fetch student profile
     response = requests.get(f'http://web-api:4000/students/{current_student_id}')
     
     if response.status_code == 200:
         student = response.json()
         
-        # Edit mode toggle
         col1, col2 = st.columns([3, 1])
         with col2:
-            edit_mode = st.toggle('✏️ Edit Profile')
+            edit_mode = st.toggle(' Edit Profile')
         
         st.write('')
         
         if edit_mode:
             st.write('### Edit Your Profile')
             
-            # Fetch majors for dropdown
             majors = []
             try:
                 majors_response = requests.get('http://web-api:4000/majors')
@@ -39,7 +35,6 @@ try:
             except:
                 pass
             
-            # Fetch locations for dropdown
             locations = []
             try:
                 locations_response = requests.get('http://web-api:4000/locations')
@@ -56,7 +51,6 @@ try:
                 
                 col1, col2 = st.columns(2)
                 with col1:
-                    # Major selection
                     if majors:
                         major_names = [m['major_name'] for m in majors]
                         current_major_name = student.get('major_name', '')
@@ -73,7 +67,6 @@ try:
                                                      max_value=2030, 
                                                      value=student.get('graduation_year', 2025))
                 
-                # Location selection
                 if locations:
                     location_strings = [f"{l['city']}, {l['state']}" for l in locations]
                     current_location = f"{student.get('city', '')}, {student.get('state', '')}"
@@ -95,16 +88,14 @@ try:
                 st.write('')
                 col_save, col_cancel = st.columns(2)
                 with col_save:
-                    submitted = st.form_submit_button('💾 Save Changes', type='primary', use_container_width=True)
+                    submitted = st.form_submit_button(' Save Changes', type='primary', use_container_width=True)
                 with col_cancel:
                     canceled = st.form_submit_button('Cancel', use_container_width=True)
                 
                 if submitted:
-                    # Validate required fields
                     if not name or not email or not profile_summary:
                         st.error('Please fill in all required fields')
                     else:
-                        # Update student profile
                         update_data = {
                             'name': name,
                             'email': email,
@@ -129,13 +120,11 @@ try:
                     st.rerun()
         
         else:
-            # View mode
             st.write('### Your Profile')
             
             col_left, col_right = st.columns([2, 1])
             
             with col_left:
-                # Basic info
                 st.write('#### Basic Information')
                 info_container = st.container()
                 with info_container:
@@ -156,12 +145,7 @@ try:
                 
                 st.write('')
                 st.caption(f"Member since: {student.get('created_at', 'N/A')}")
-            
-            with col_right:
-                # Profile stats
-                st.write('#### Your Activity')
                 
-                # Get connection count
                 try:
                     conn_response = requests.get(f'http://web-api:4000/connections/student/{current_student_id}')
                     if conn_response.status_code == 200:
@@ -174,7 +158,6 @@ try:
                 except:
                     st.metric('Active Connections', 'N/A')
                 
-                # Get session count
                 try:
                     sessions_response = requests.get(f'http://web-api:4000/sessions/student/{current_student_id}')
                     if sessions_response.status_code == 200:
@@ -183,7 +166,6 @@ try:
                 except:
                     st.metric('Total Sessions', 'N/A')
         
-        # Profile completion reminder
         if not student.get('profile_summary') or len(student.get('profile_summary', '')) < 50:
             st.write('')
             st.warning('💡 **Tip:** Complete your profile summary to help alumni understand how they can best help you!')
@@ -195,14 +177,13 @@ except Exception as e:
     st.error(f'Error: {str(e)}')
     logger.error(f'Error in My_Profile: {str(e)}')
 
-# Quick actions
 st.write('')
 st.write('---')
 st.write('### Quick Actions')
 col1, col2 = st.columns(2)
 with col1:
-    if st.button('🔍 Browse Alumni', use_container_width=True):
+    if st.button(' Browse Alumni', use_container_width=True):
         st.switch_page('pages/31_Students_Browse_Alumni.py')
 with col2:
-    if st.button('📅 My Sessions', use_container_width=True):
+    if st.button(' My Sessions', use_container_width=True):
         st.switch_page('pages/32_Students_My_Sessions.py')

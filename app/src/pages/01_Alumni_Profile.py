@@ -4,7 +4,6 @@ import pandas as pd
 import streamlit as st
 import requests
 from streamlit_extras.app_logo import add_logo
-import nu_connect as neu_con
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
@@ -20,7 +19,7 @@ st.title('Alumni Profile')
 st.write(f"### Hi, {st.session_state['first_name']}.")
 
 # Get alumni ID from session state
-alumni_id = st.session_state.get("alumni_id")
+alumni_id = st.session_state.get("user_id")
 
 if alumni_id is None:
     st.error("No Alumni profile available")
@@ -40,9 +39,9 @@ else:
             alumni = response.json()
 
             # Display basic information
-            st.header(alumni["Name"])
+            st.header(alumni["name"])
 
-            col1 = st.columns(1)
+            col1, = st.columns(1)
 
             with col1:
                 st.subheader("About You")
