@@ -2,6 +2,8 @@
 
 NEU Connect is a mentorship and networking platform that connects current Northeastern students with alumni mentors. The system supports role-based functionality across four personas: Student, Alumni, System Administrator, and Data Analyst.
 
+Check out the video demo here: https://youtu.be/Tv12KHTkoKo
+
 ## Team members
 
 - Alex Sun
