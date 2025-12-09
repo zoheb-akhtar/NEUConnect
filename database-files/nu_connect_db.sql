@@ -2,6 +2,7 @@ DROP DATABASE IF EXISTS nu_connect;
 CREATE DATABASE IF NOT EXISTS nu_connect;
 USE nu_connect;
 
+
 -- Location table
 DROP TABLE IF EXISTS location;
 CREATE TABLE IF NOT EXISTS location (

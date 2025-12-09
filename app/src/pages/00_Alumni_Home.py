@@ -69,7 +69,7 @@ st.write('')
 # Show pending connection requests if any exist
 if pending_requests > 0:
     st.write('---')
-    st.write('### 📬 Pending Connection Requests')
+    st.write('###  Pending Connection Requests')
     
     try:
         pending_conn = [c for c in all_connections if c.get('status') == 'pending']
@@ -88,7 +88,7 @@ if pending_requests > 0:
                         
                         with col1:
                             st.write(f"**{student.get('name', 'N/A')}**")
-                            st.write(f"📚 {student.get('major_name', 'N/A')} • Class of {student.get('graduation_year', 'N/A')}")
+                            st.write(f" {student.get('major_name', 'N/A')} • Class of {student.get('graduation_year', 'N/A')}")
                             if student.get('profile_summary'):
                                 st.caption(student['profile_summary'][:100] + '...' if len(student['profile_summary']) > 100 else student['profile_summary'])
                         
@@ -132,25 +132,30 @@ st.write('')
 st.write('')
 
 # Main action buttons
-if st.button('👤 View Your Profile', 
+if st.button(' View Your Profile', 
              type='primary',
              use_container_width=True):
     st.switch_page('pages/01_Alumni_Profile.py')
 
-if st.button('🎓 View Student Profiles', 
+if st.button(' View Student Profiles', 
              type='primary',
              use_container_width=True):
     st.switch_page('pages/02_Student_Profiles.py')
 
-if st.button('📅 Configure Your Availability', 
+if st.button(' Configure Your Availability', 
              type='primary', 
              use_container_width=True):
     st.switch_page('pages/03_Alumni_Availability.py')
 
+if st.button(' Job Postings', 
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/04_Alumni_Job_Postings.py')
+
 # Recent activity section
 st.write('')
 st.write('')
-st.write('### 📌 Recent Activity')
+st.write('###  Recent Activity')
 
 try:
     # Show recently accepted connections (sorted by date)
@@ -165,7 +170,7 @@ try:
             student_response = requests.get(f'http://web-api:4000/students/{conn.get("student_id")}')
             if student_response.status_code == 200:
                 student = student_response.json()
-                st.info(f'✅ Connected with {student.get("name")} ({student.get("major_name")})')
+                st.info(f' Connected with {student.get("name")} ({student.get("major_name")})')
         except:
             pass
     
@@ -181,7 +186,7 @@ try:
             student_response = requests.get(f'http://web-api:4000/students/{conn.get("student_id")}')
             if student_response.status_code == 200:
                 student = student_response.json()
-                st.warning(f'❌ Declined connection with {student.get("name")}')
+                st.warning(f' Declined connection with {student.get("name")}')
         except:
             pass
     
@@ -198,7 +203,7 @@ try:
                 student_response = requests.get(f'http://web-api:4000/students/{session.get("student_id")}')
                 if student_response.status_code == 200:
                     student = student_response.json()
-                    st.info(f'📅 Upcoming session with {student.get("name")} - {session.get("topic", "No topic")}')
+                    st.info(f' Upcoming session with {student.get("name")} - {session.get("topic", "No topic")}')
             except:
                 pass
     

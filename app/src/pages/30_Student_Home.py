@@ -61,24 +61,29 @@ with col3:
 st.write('')
 st.write('')
 
-if st.button('🔍 Browse Alumni Mentors', 
+if st.button(' Browse Alumni Mentors', 
              type='primary',
              use_container_width=True):
     st.switch_page('pages/31_Students_Browse_Alumni.py')
 
-if st.button('📅 My Sessions', 
+if st.button(' My Sessions', 
              type='primary',
              use_container_width=True):
     st.switch_page('pages/32_Students_My_Sessions.py')
 
-if st.button('👤 My Profile', 
+if st.button(' My Profile', 
              type='primary',
              use_container_width=True):
     st.switch_page('pages/33_Students_My_Profile.py')
 
+if st.button(' Job Postings', 
+             type='primary',
+             use_container_width=True):
+    st.switch_page('pages/34_Students_Job_Postings.py')
+
 st.write('')
 st.write('')
-st.write('### 📌 Recent Activity')
+st.write('###  Recent Activity')
 
 try:
     recent_accepted = sorted(
@@ -122,7 +127,7 @@ try:
             alumni_response = requests.get(f'http://web-api:4000/alumni/{session.get("alumni_id")}')
             if alumni_response.status_code == 200:
                 alumni = alumni_response.json()
-                st.info(f'📅 Session scheduled with {alumni.get("name")} - {session.get("topic", "No topic")}')
+                st.info(f' Session scheduled with {alumni.get("name")} - {session.get("topic", "No topic")}')
         except:
             pass
     
